@@ -1,0 +1,288 @@
+在fedora上用vim打造一个php集成开发环境（ide）
+1 安装vim
+yum install vim-X11.x86_64  vim-common.x86_64 vim-enhanced.x86_64
+vim-minimal.x86_64
+
+2 创建配置文件
+touch ~/.vimrc
+
+3 我的配置文件
+" .vimrc
+" See: http://vimdoc.sourceforge.net/htmldoc/options.html for details
+
+"设定 gvim 运行在增强模式下,不使用vi的键盘模式
+set nocompatible
+"设置支持多语言,解决乱码
+set encoding=utf-8
+set fileencodings=utf-8,gbk,default,latin1
+"设置字体，配色方案
+if has("gui_running")
+set guifont=Courier\ New\ 14
+" on windows,use "set guifont=Courier:14 "
+"设置配色方案
+" colorscheme oceandeep
+endif
+
+"基本编辑器设置
+set number          "显示行号
+set expandtab       "编辑时将所有 Tab 替换为空格
+set shiftwidth=2    "自动缩进的时候，缩进尺寸为2个空格
+set tabstop=2       "设置 softtabstop 为 2. 输入 tab 后就跳了2格
+"对于不同类型的文件，进行自定义设置
+au FileType html,python,vim,javascript,css setl shiftwidth=2
+au FileType html,python,vim,javascript,css setl tabstop=2
+au FileType java,php setl shiftwidth=4
+au FileType java,php setl tabstop=4
+
+set textwidth=80    "设置每行的最大字符数，超过的话，将换行
+set hlsearch        "搜索时高亮显示 
+set incsearch       "输入搜索内容时就显示搜索结果
+set fileformat=unix "文本格式
+set nobackup        "覆盖文件时不备份
+
+set ruler           "打开状态栏标尺
+set laststatus=2    "显示状态栏 (默认值为 1, 无法显示状态栏)
+set cmdheight=1     "设定命令行的行数为 1
+
+set showtabline=2   "显示tab标签
+set tabline+=%f     "tab标签
+" Enable Code Folding
+set foldenable
+set foldmethod=syntax
+set mouse=a         "任何情况都可以使用鼠标）
+
+"去掉错误声音
+set vb t_vb=
+"工作目录随文件变
+autocmd BufEnter * cd %:p:h
+"设置状态栏
+set statusline=%F%m%r,%Y,%{&fileformat}\ \ \ ASCII=\%b,HEX=\%B\ \ \ %l,%c%V\
+%p%%\ \ \ [\ %L\ lines\ in\ all\ ]
+"不显示工具条
+set guioptions-=T
+set backspace=indent,eol,start "不设定的话在插入状态无法用退格键和 Delete
+filetype on        "设置文件类型的检测
+filetype plugin on "为特定的文件类型允许插件文件的载入
+
+"按住ctrl键，移动方向键时，以峰驼的方式
+nnoremap <silent><C-Left>  :<C-u>cal
+search('\<\<Bar>\U\@<=\u\<Bar>\u\ze\%(\U\&\>\@!\)\<Bar>\%^','bW')<CR>
+nnoremap <silent><C-Right> :<C-u>cal
+search('\<\<Bar>\U\@<=\u\<Bar>\u\ze\%(\U\&\>\@!\)\<Bar>\%$','W')<CR>
+inoremap <silent><C-Left>  <C-o>:cal
+search('\<\<Bar>\U\@<=\u\<Bar>\u\ze\%(\U\&\>\@!\)\<Bar>\%^','bW')<CR>
+inoremap <silent><C-Right> <C-o>:cal
+search('\<\<Bar>\U\@<=\u\<Bar>\u\ze\%(\U\&\>\@!\)\<Bar>\%$','W')<CR> 
+
+"php语法检查
+setlocal makeprg=\/usr/bin/php\ -l\ -n\ -d\ html_errors=off\ %
+setlocal errorformat=%m\ in\ %f\ on\ line\ %l
+"autocmd BufWritePost *.php,*.phps :make
+map :w:noh:make
+
+"Disable phpsyntax based indenting for .php files
+au BufRead,BufNewFile *.php             set indentexpr= | set smartindent
+au BufRead,BufNewFile *.phps            set filetype=php
+
+5 插件配置
+
+1)集成NERDTree实现目录导航
+wget https://github.com/scrooloose/nerdtree/tarball/master
+tar zxvf scrooloose-nerdtree-4.1.0-35-g1cd5048.tar.gz
+cp doc/NERD_tree.txt /usr/share/vim/vimfiles/doc/
+cp plugin/NERD_tree.vim /usr/share/vim/vimfiles/plugin/
+cp -fr nerdtree_plugin/ /usr/share/vim/vimfiles/
+最后在 .vimrc 添加如下内容：
+
+"NERDTree
+map <F10> :NERDTreeToggle<CR>
+let NERDTreeIgnore=['\.svn$','\.bak$']
+
+通过F10即可调出目录导航,通过键盘ctrl+w+w可以在导航和编辑中的文件之前切换焦点。“u”可到上一级目录，回车则展开文件夹
+
+2)集成task list url：http://www.vim.org/scripts/script.php?script_id=2607
+cp tasklist.vim /usr/share/vim/vimfiles/plugin/
+通过":TaskList"可以列出代码中的TODO和FIXME列表，将鼠标移动到相应的项目上时，会关闭列表窗口，并跳转到代码指定的位置
+
+3)集成tag list url：http://www.vim.org/scripts/script.php?script_id=273
+taglist 可以列出已打开文件中定义的类、函数、常量，甚至变量。
+cp plugin/taglist.vim /usr/share/vim/vimfiles/plugin/
+cp doc/taglist.txt /usr/share/vim/vimfiles/doc/
+最后在 .vimrc 添加如下内容：
+
+"taglist
+map <F3> :TlistToggle<CR>
+let Tlist_Auto_Highlight_Tag = 1
+let Tlist_Auto_Open = 0
+let Tlist_Auto_Update = 1
+let Tlist_Close_On_Select = 0
+let Tlist_Compact_Format = 0
+let Tlist_Display_Prototype = 0
+let Tlist_Display_Tag_Scope = 1
+let Tlist_Enable_Fold_Column = 0
+let Tlist_Exit_OnlyWindow = 0
+let Tlist_File_Fold_Auto_Close = 0
+let Tlist_GainFocus_On_ToggleOpen = 1
+let Tlist_Hightlight_Tag_On_BufEnter = 1
+let Tlist_Inc_Winwidth = 0
+let Tlist_Max_Submenu_Items = 1
+let Tlist_Max_Tag_Length = 30
+let Tlist_Process_File_Always = 0
+let Tlist_Show_Menu = 0
+let Tlist_Show_One_File = 0
+let Tlist_Sort_Type = "order"
+let Tlist_Use_Horiz_Window = 0
+let Tlist_Use_Right_Window = 0
+let Tlist_WinWidth = 40
+let tlist_php_settings = 'php;c:class;i:interfaces;d:constant;f:function'
+
+4)集成php-doc url http://www.vim.org/scripts/script.php?script_id=1355
+cp php-doc.vim /usr/share/vim/vimfiles/plugin/
+
+最后在 .vimrc 添加如下内容：
+"在通常模式（n）和插入模式（i），按ctrl+p插入注释
+inoremap <buffer> <C-P> ^[:call PhpDocSingle()<CR>i
+nnoremap <buffer> <C-P> :call PhpDocSingle()<CR>
+"选择多行，在可视模式（v）下，对选中的多行插入注释
+vnoremap <buffer> <C-P> :call PhpDocRange()<CR>
+
+5)集成PHPM url http://eide.org/2009/01/02/phpm/
+cp -fr phpm /usr/share/vim/vimfiles
+最后在 .vimrc 添加如下内容：
+
+" Map <CTRL>-H to search phpm for the function name currently under the cursor
+(insert mode only)
+inoremap <buffer> <C-H> <ESC>:!/usr/share/vim/vimfiles/phpm/phpm
+<C-R>=expand("<cword>")<CR><CR>
+在插入模式下，按ctrl+h，即可调出光标在函数的说明，参数，返回值
+
+6)集成funclist，实现自动完成 url
+http://svn.php.net/viewvc/phpdoc/doc-base/trunk/funclist.txt
+cp funclist.txt /usr/share/vim/vimfiles
+最后在 .vimrc 添加如下内容：
+
+setlocal dictionary-=/usr/share/vim/vimfiles/funclist.txt
+dictionary+=/usr/share/vim/vimfiles/funclist.txt
+" Use the dictionary completion
+setlocal complete-=k complete+=k
+
+func! InsertTabWrapper()
+    let col = col('.') - 1
+    if !col || getline('.')[col - 1] !~ '\k'
+        return "\<tab>"
+    else
+        return "\<c-p>"
+    endif
+endfunction
+
+" Remap the tab key to select action with InsertTabWrapper
+inoremap <buffer> <tab> <c-r>=InsertTabWrapper()<cr>
+在插入模式下，按tab，即可调出函数列表
+
+7)在任意模式下，按";"在行尾输入添加";"，如果没有";"的话
+noremap <buffer> ; :s/\([^;]\)$/\1;/<cr>
+
+8)配置 PhpAlign,手动格式代码的对齐
+在 .vimrc 添加如下内容：
+
+" Map <CTRL>-a to alignment function
+vnoremap <buffer> <C-a> :call PhpAlign()<CR>
+
+func! PhpAlign() range
+    let l:paste = &g:paste
+    let &g:paste = 0
+
+    let l:line        = a:firstline
+    let l:endline     = a:lastline
+    let l:maxlength = 0
+    while l:line <= l:endline
+                " Skip comment lines
+                if getline (l:line) =~ '^\s*\/\/.*$'
+                        let l:line = l:line + 1
+                        continue
+                endif
+                " \{-\} matches ungreed *
+        let l:index = substitute (getline (l:line),
+'^\s*\(.\{-\}\)\s*\S\{0,1}=\S\{0,1\}\s.*$', '\1', "")
+        let l:indexlength = strlen (l:index)
+        let l:maxlength = l:indexlength > l:maxlength ? l:indexlength :
+l:maxlength
+        let l:line = l:line + 1
+    endwhile
+
+        let l:line = a:firstline
+        let l:format = "%s%-" . l:maxlength . "s %s %s"
+
+        while l:line <= l:endline
+                if getline (l:line) =~ '^\s*\/\/.*$'
+                        let l:line = l:line + 1
+                        continue
+                endif
+        let l:linestart = substitute (getline (l:line), '^\(\s*\).*', '\1', "")
+        let l:linekey   = substitute (getline (l:line),
+'^\s*\(.\{-\}\)\s*\(\S\{0,1}=\S\{0,1\}\)\s\(.*\)$', '\1', "")
+        let l:linesep   = substitute (getline (l:line),
+'^\s*\(.\{-\}\)\s*\(\S\{0,1}=\S\{0,1\}\)\s\(.*\)$', '\2', "")
+        let l:linevalue = substitute (getline (l:line),
+'^\s*\(.\{-\}\)\s*\(\S\{0,1}=\S\{0,1\}\)\s\(.*\)$', '\3', "")
+
+        let l:newline = printf (l:format, l:linestart, l:linekey, l:linesep,
+l:linevalue)
+        call setline (l:line, l:newline)
+        let l:line = l:line + 1
+    endwhile
+    let &g:paste = l:paste
+endfunc
+在可视模式下，选中代码，按ctrl+a，即可格式代码的对齐
+
+9)配置 PhpUnComment,批量注释代码
+在 .vimrc 添加如下内容：
+
+vnoremap <buffer> <C-c> :call PhpUnComment()<CR>
+
+func! PhpUnComment() range
+    let l:paste = &g:paste
+    let &g:paste = 0
+
+    let l:line        = a:firstline
+    let l:endline     = a:lastline
+
+        while l:line <= l:endline
+                if getline (l:line) =~ '^\s*\/\/.*$'
+                        let l:newline = substitute (getline (l:line),
+'^\(\s*\)\/\/ \(.*\).*$', '\1\2', '')
+                else
+                        let l:newline = substitute (getline (l:line),
+'^\(\s*\)\(.*\)$', '\1// \2', '')
+                endif
+                call setline (l:line, l:newline)
+                let l:line = l:line + 1
+        endwhile
+
+    let &g:paste = l:paste
+endfunc
+在可视模式下，选中代码，按ctrl+c，即批量注释代码，再按就取消注释
+
+10)设置自动补齐
+在 .vimrc 添加如下内容：
+
+inoremap <buffer>  { {<CR>}<C-O>O
+
+inoremap <buffer> [ []<LEFT>
+
+" Standard mapping after PEAR coding standard
+inoremap <buffer> ( ()<LEFT><LEFT>
+" inoremap <buffer> ( ()<LEFT>
+
+" Maybe this way in other coding standards
+" inoremap ( ( )<LEFT><LEFT> 
+
+inoremap <buffer> " ""<LEFT>
+inoremap <buffer> ' ''<LEFT>
+
+参考链接
+http://eide.org/category/php/
+http://taggedzi.com/articles/display/vim-for-php-developers-part-3
+http://www.foolbirds.com/c/vi
+https://github.com/tobyS/vip
+
