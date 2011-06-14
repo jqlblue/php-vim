@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<settings>
+    <!--
+        Generation of the php.net manual 
+    -->
+    <!-- The path to the cvs REFERENCE directory -->
+	<cvsdir>/usr/share/vim/vimfiles/phpm/phpdoc/en/reference</cvsdir>
+	<!-- Enable debugging -->
+	<debug>1</debug>
+	<!-- where to save the manual -->
+	<save>php.xml</save>
+	
+	
+	<!-- Display options, see Console_Color for valid options -->
+	<color display="yes">
+		<func>B</func>
+		<return>G</return>
+		<type>b</type>
+		<var>B</var>
+	</color>
+	<!-- Set to what you are u sing the most -->
+	<defaultproject value="php" />
+	
+	<!-- Version 0.3 -->
+	<download listing="http://eide.org/files/phpm/list.xml" />
+	
+	<install path="/usr/share/vim/vimfiles/phpm" />
+</settings>

@@ -1,0 +1,55 @@
+--------------
+Program: phpm 
+Author: Havard Eide
+Version: 0.3
+License: GPL
+Release: 20/11/2004
+--------------
+Quick description:
+phpm is a program for accessing API calls for PHP libraries.
+It was originally created to query the PHP manual from the shell,
+but comes with a range of pre-generated project API's that can
+be queried.
+
+--------------
+The files:
+* generator.php 
+  This is the XML generator: if you have a CVS dir with the
+  PHP doc code - configure "settings.xml" and run this
+  with "php epcmanual.php"
+  
+* reader.php
+  This is the actual query tool: run it with
+  "php reader.php mysql_query" to get the result.
+  If a exact hit isn't found it will query the API for functions
+  that start with the argument, if this fails the program will 
+  try a wildcard query for anything that contains the argument.
+  The "xml/*.xml" contains all the functions, pregenerated, so 
+  you don't need to run the "generator.php" to generate it.
+
+  To query a different project than the default:
+  "php reader.php -p pro query" where "pro" is one of the projects listed 
+  below.
+ 
+* The "phpm" script
+  You will need to symlink this to /usr/bin/, /usr/local/bin with:
+  "sudo ln -s /Users/nucleuz/Sites/phpm/phpm /usr/bin/phpm"
+  to make it work from anywhere in the terminal. 
+  
+  You will also need to change the first command to reference the folder
+  where this program is installed
+	
+* xml files
+  Update the settings.xml and point to a directory where you want
+  the XML files to be stored. Download and copy the XML bundle from eide.org
+  to this folder.
+  
+----------------
+ToDo:
+  - Versioning
+  - Integrate with wordpress [Planned for v0.4]
+  - Support for wildcard query [Done - v0.2]
+  - Query for a class
+  - Get extended result "-e" -> more text from the DocBook needs to be extracted. [Done -v0.3]
+
+Havard Eide.  

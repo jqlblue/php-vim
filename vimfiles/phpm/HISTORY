@@ -1,0 +1,32 @@
+20/11/2004
+	- Added support for extended information, all the old XML files will not
+	  work with this new functionality:
+	  * -e/--extended: extended description
+	  * -s/--short: short description
+	- Added remote install: you can now query for projects and install from the
+	  eide.org server ( see http://wiki.cc/php/Epc_phpm for more information ) 
+	- Added help to the program "-h/--help"
+	- New settings param in settings.xml , so make sure to update this!
+	- A new phpDocumentor converter is in place for people that want to generate their
+	  own XML files ( contact me and I'll put them on the server )
+	  
+14/11/2004
+	- Added support for multiple projects, all XML is now in "xml/"
+		This needs the "-p pro" call where "pro" is a project name
+	- Added support for wildcard query if a exact match isn't found
+	- Multiple function calls will be output to the terminal if more than one
+		hit was found for the param
+	- Added "defaultproject" node to the settings
+	- Added support for case/case-insensitive queries:
+		* -c/--case or -ci/--case-insensitive
+	- The query needs to be the last thing passed in the argument line
+
+01/11/2004
+	- Added a "phpm" bash script
+	- More information and renamed the files to be a bit more 
+	description to what they do.
+	- Added more configuration options to color the output
+	with Console_Color ( Optional )
+	
+31/10/2004
+	First release with base functionality

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<phpm>
+    <download path="http://eide.org/files/phpm/xml/" />
+    <project>
+        <key>epc</key>
+        <name>Eide PHP Classes</name>
+        <version>CVS Head</version>
+        <updated>2004/11/20</updated>
+        <home>http://eide.org/?epc=php</home>
+        <license>GPL</license>
+    </project>
+    <project>
+        <key>ism</key>
+        <name>Isom</name>
+        <version>0.1.4</version>
+        <updated>2004/11/20</updated>
+        <home>http://ismo.morrdusk.net/</home>
+        <license>PHP</license>
+    </project>  
+    <project>
+        <key>moj</key>
+        <name>Mojavi</name>
+        <version>3.0.0</version>
+        <updated>2004/11/20</updated>
+        <home>http://www.mojavi.org</home>
+        <license>LGPL</license>
+    </project>
+    <project>
+        <key>php</key>
+        <name>php.net manual</name>
+        <updated>2004/11/20</updated>
+        <version>CVS HEAD</version>
+        <home>http://php.net/manual</home>
+        <license>PHP</license>
+    </project>     
+    <project>
+        <key>phr</key>
+        <name>Phrame</name>
+        <version>2.1RC1</version>
+        <updated>2004/11/20</updated>
+        <home>http://sourceforge.net/projects/phrame</home>
+        <license>LGPL</license>
+    </project>           
+    <project>
+        <key>phv</key>
+        <name>php.MVC</name>
+        <version>0.3.4</version>
+        <updated>2004/11/20</updated>
+        <home>http://www.phpmvc.net</home>
+        <license>LGPL</license>
+    </project>
+    <project>
+        <key>pra</key>
+        <name>Prado</name>
+        <version>1.6</version>
+        <updated>2004/11/20</updated>
+        <home>http://www.xisc.com/</home>
+        <license>BSD</license>
+    </project>
+    <project>
+        <key>rmf</key>
+        <name>rmfPHP</name>
+        <version>0.1.2</version>
+        <updated>2004/11/20</updated>
+        <home>http://www.rwfphp.org/</home>
+        <license>BSD (?)</license>
+    </project>
+    <project>
+        <key>sim</key>
+        <name>SimpleTest</name>
+        <version>1.0RC1</version>
+        <updated>2004/11/20</updated>
+        <home>http://sourceforge.net/projects/simpletest/</home>
+        <license>The Open Group Test Suite License</license>
+    </project>    
+    <project>
+        <key>std</key>
+        <name>studs</name>
+        <version>1.0RC1</version>
+        <updated>2004/11/20</updated>
+        <home>http://www.mojavelinux.com/projects/studs/</home>
+        <license>Apache2.0</license>
+    </project>  
+    <project>
+        <key>wct</key>
+        <name>wact</name>
+        <version>CVS head</version>
+        <updated>2004/11/20</updated>
+        <home>http://wact.sourceforge.net</home>
+        <license>LGPL</license>
+    </project>
+    <project>
+        <key>xp</key>
+        <name>wact</name>
+        <version>xp-2004-11-12</version>
+        <updated>2004/11/20</updated>
+        <home>http://xp-framework.net/</home>
+        <license>BSD</license>
+    </project>       
+</phpm>

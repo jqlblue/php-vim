@@ -1,0 +1,5 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_1='/var/log/httpd'
+let g:netrw_dirhist_2='/var/www/html'
+let g:netrw_dirhist_3='/usr/share/vim/vimfiles/phpm/phpdoc/en/reference/zlib/functions'
