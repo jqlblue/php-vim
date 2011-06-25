@@ -4,6 +4,6 @@ function! Phpcs()
   cwindow
 endfunction
 " :w 自动验证语法
-autocmd BufWritePost *.php call Phpcs()
+" autocmd BufWritePost *.php call Phpcs()
 " :Phpcs 验证语法
 command! Phpcs execute Phpcs()
