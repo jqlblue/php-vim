@@ -111,6 +111,8 @@ cp doc/taglist.txt /usr/share/vim/vimfiles/doc/
 最后在 .vimrc 添加如下内容：
 
 "taglist
+set tags=tags;/
+let Tlist_Ctags_Cmd="/usr/bin/ctags"
 map <F3> :TlistToggle<CR>
 let Tlist_Auto_Highlight_Tag = 1
 let Tlist_Auto_Open = 0
@@ -135,6 +137,20 @@ let Tlist_Use_Horiz_Window = 0
 let Tlist_Use_Right_Window = 0
 let Tlist_WinWidth = 40
 let tlist_php_settings = 'php;c:class;i:interfaces;d:constant;f:function'
+
+map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
+map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
+
+需要安装ctags，本文采用yum安装，如需编译安装，请参见其他资料。
+通过ctags -R生成tags后，可以使用如下快捷键：
+ctrl+] - 跳转到定义处
+ctrl+t - 从定义处跳转回来
+ctrl+w ctrl+] - 水平分割窗口，并在上部打开定义所在文件，跳转到定义处
+ctrl+\ - 打开新标签页。并跳转到定义处
+alt+] - 垂直分割窗口，并在右部打开定义所在文件，跳转到定义处
+
+ctrl+鼠标左键 - 跳转到定义处
+ctrl+鼠标右键 - 从定义处跳转回来
 
 4)集成php-doc url http://www.vim.org/scripts/script.php?script_id=1355
 cp php-doc.vim /usr/share/vim/vimfiles/plugin/
