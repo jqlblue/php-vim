@@ -1,0 +1,33 @@
+some shortcut keys in use php-vim
+
+f3 - show tag list,press agian to close
+f2 - show NERD_tree,press again to close
+[v,i]ctrl+p - 在可视和插入模式下，调用phpdoc会函数和类添加phpdocument
+[v]ctrl+a - 在可视模式下，调用phpAlign对代码格式进行对齐
+[i]ctrl+h - 在插入模式下，调用phpm打开php函数的定义
+[v]ctrl+c - 注释代码块或者行，再按一下则取消注释
+[v,i]ctrl+方向键 - 以峰驼的形式，跳转到上一处或者下一处
+
+ctrl+] - 跳转到定义处
+ctrl+t - 从定义处跳转回来
+ctrl+w ctrl+] - 水平分割窗口，并在上部打开定义所在文件，跳转到定义处
+ctrl+\ - 打开新标签页。并跳转到定义处
+alt+] - 垂直分割窗口，并在右部打开定义所在文件，跳转到定义处
+
+
+ctrl+鼠标左键 - 跳转到定义处
+ctrl+鼠标右键 - 从定义处跳转回来
+
+some command in use php-vim
+
+:tabnew[:tabe] - 打开新的标签页
+:tabclose[:tabc] - 关闭正在打开的标签页
+:vimgrep - 在文件夹中查找
+  在当前目录下查找含有“getInfo”的php文档，但不跳到第一个匹配
+  :vimgrep /getInfo/gj ./*/*.php
+  如果要包含子文件夹，则用
+  :vimgrep /getInfo/gj ./**/*.php
+  :vim[grep][!] /{pattern}/[g][j] {file}
+:cw -  打开quickfix窗口查看匹配结果
+
+

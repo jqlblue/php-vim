@@ -71,7 +71,7 @@ set modeline
 " => Plugin configuration
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " NERDTree
-map <F10> :NERDTreeToggle<CR>
+map <F2> :NERDTreeToggle<CR>
 let NERDTreeIgnore=['\.svn$','\.bak$']
 
 " taglist
