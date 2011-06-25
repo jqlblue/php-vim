@@ -2,3 +2,34 @@
 2 update phpm
 3 other 
 4 check phpcs use,and uncomment later
+5 search in floder
+在当前目录下查找含有“getInfo”的php文档，但不跳到第一个匹配
+:vimgrep /getInfo/gj ./*/*.php
+如果要包含子文件夹，则用
+:vimgrep /getInfo/gj ./**/*.php
+:cw
+打开quickfix窗口查看匹配结果
+:vim[grep][!] /{pattern}/[g][j] {file}
+Search for {pattern} in the files {file} … and set
+the error list to the matches.
+Without the ‘g’ flag each line is added only once.
+With ‘g’ every match is added.
+
+{pattern} is a Vim search pattern.  Instead of
+enclosing it in / any non-ID character (see
+|’isident’|) can be used, so long as it does not
+appear in {pattern}.
+‘ignorecase’ applies.  To overrule it put |/c| in the
+pattern to ignore case or |/C| to match case.
+‘smartcase’ is not used.
+
+When a number is put before the command this is used
+as the maximum number of matches to find.  Use
+“:1vimgrep pattern file” to find only the first.
+Useful if you only want to check if there is a match
+and quit quickly when it’s found.
+
+Without the ‘j’ flag Vim jumps to the first match.
+With ‘j’ only the quickfix list is updated.
+With the [!] any changes in the current buffer are
+abandoned.
