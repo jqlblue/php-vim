@@ -33,3 +33,5 @@ Without the ‘j’ flag Vim jumps to the first match.
 With ‘j’ only the quickfix list is updated.
 With the [!] any changes in the current buffer are
 abandoned.
+
+@@@@ test github
