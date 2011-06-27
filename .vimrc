@@ -75,6 +75,8 @@ map <F2> :NERDTreeToggle<CR>
 let NERDTreeIgnore=['\.svn$','\.bak$']
 
 " taglist
+set tags=tags;/
+let Tlist_Ctags_Cmd="/usr/bin/ctags"
 map <F3> :TlistToggle<CR>
 let Tlist_Auto_Highlight_Tag = 1
 let Tlist_Auto_Open = 0
