@@ -295,10 +295,16 @@ inoremap <buffer> ( ()<LEFT><LEFT>
 
 inoremap <buffer> " ""<LEFT>
 inoremap <buffer> ' ''<LEFT>
+11)在文件夹中查找
+:vimgrep /pattern/gj ./**/*.php
+这哥命令告诉vim，在当前目前下的所有.php文件中全局查找符合pattern的结果。
+运行
+:cw
+会列出查找结果。
 
 参考链接
 http://eide.org/category/php/
 http://taggedzi.com/articles/display/vim-for-php-developers-part-3
 http://www.foolbirds.com/c/vi
 https://github.com/tobyS/vip
-
+http://lostechies.com/derickbailey/2010/05/11/vim-grep-find-all-occurrences-of-text-in-your-project/
