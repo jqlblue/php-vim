@@ -302,6 +302,23 @@ inoremap <buffer> ' ''<LEFT>
 :cw
 会列出查找结果。
 
+11）转换大小写
+～ 转换当前光标所在字符的大小写
+u  将选中的字符全转成小写
+U  将选中的字符全转成大写
+UV 将当前行转成大写
+guw 将当前的单词转成小写
+
+12）排序
+vim在linux上，可以通过在命令模式下输入相关命令，进行文本的排序
+%!sort -u 排序时，删除重复的行
+%!sort -f 排序时，忽略大小写
+%!sort -r 进行逆向排序
+排序时，都是以行为单位。按照字典顺序，如：a-z, 0-100的顺序进行排序
+sort /pattern/ 可以在排序时，过滤掉正则匹配到的字符。
+sort /^./ 将不是按照第一个字符排序，而是过滤掉第一个字符，从第二个开始。正则表达式/^./匹配开头的第一个字符。
+
+
 参考链接
 http://eide.org/category/php/
 http://taggedzi.com/articles/display/vim-for-php-developers-part-3
