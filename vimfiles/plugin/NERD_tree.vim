@@ -55,7 +55,7 @@ call s:initVariable("g:NERDTreeMinimalUI", 0)
 if !exists("g:NERDTreeIgnore")
     let g:NERDTreeIgnore = ['\~$']
 endif
-call s:initVariable("g:NERDTreeBookmarksFile", expand('$HOME') . '/.NERDTreeBookmarks')
+call s:initVariable("g:NERDTreeBookmarksFile", expand('$HOME') . '/.ndtv')
 call s:initVariable("g:NERDTreeHighlightCursorline", 1)
 call s:initVariable("g:NERDTreeHijackNetrw", 1)
 call s:initVariable("g:NERDTreeMouseMode", 1)
@@ -90,7 +90,7 @@ if !exists('g:NERDTreeStatusline')
 
 endif
 call s:initVariable("g:NERDTreeWinPos", "left")
-call s:initVariable("g:NERDTreeWinSize", 31)
+call s:initVariable("g:NERDTreeWinSize", 23)
 
 let s:running_windows = has("win16") || has("win32") || has("win64")
 

@@ -176,12 +176,3 @@ func! PhpUnComment() range
 endfunc
 
 " }}}
-" add smarty tag
-""{{{
-nnoremap <F8> :call RunSmarty()<CR> 
-func! RunSmarty()
-    let smarty_tag = " <!--{}--> "
-      execute "normal i" . smarty_tag
-    endfunc
-""}}}
-
