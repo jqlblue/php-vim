@@ -9,7 +9,7 @@ function! Phpcs()
 endfunction
 
 " :w 自动验证语法
-autocmd BufWritePost *.php call Phpcs()
+" autocmd BufWritePost *.php call Phpcs()
 " :Phpcs 验证语法
 set errorformat=\"%f\"\\,%l\\,%c\\,%t%*[a-zA-Z]\\,\"%m\"\\,%*[a-zA-Z0-9_.-]\\,%*[0-9]
 command! Phpcs execute Phpcs()

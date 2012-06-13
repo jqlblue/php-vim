@@ -1,11 +1,6 @@
 " .vimrc
 " See: http://vimdoc.sourceforge.net/htmldoc/options.html for details
 
-" Source local settings
-if filereadable("~/.vimrc")
-    source ~/.vimrc
-endif
-
 " disable VI's compatible mode（关闭vi兼容模式）
 set nocompatible
 " set encoding=utf-8（设置支持多语言）
@@ -45,9 +40,7 @@ set showtabline=2     " 生成多tab
 set tabline+=%f
 " Enable Code Folding
 set foldenable
-set foldmethod=syntax
-set mouse=a         " Enable the use of the mouse.（可以使用鼠标）
-
+set foldmethod=marker
 
 set cmdheight=1     "设定命令行的行数为 1
 "去掉烦死我的错误声音
@@ -60,16 +53,19 @@ set statusline=%F%m%r,%Y,%{&fileformat}\ \ \ ASCII=\%b,HEX=\%B\ \ \ %l,%c%V\ %p%
 "set guioptions-=T
 set backspace=indent,eol,start "不设定的话在插入状态无法用退格键和 Delete
 filetype indent on "设置文件类型的检测，e.g. for PHP
-filetype plugin on "为特定的文件类型允许插件文件的载入
-
+filetype plugin on
 " Allow file inline modelines to provide settings
 set modeline
+syntax on
 
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin configuration
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" task list
+map <S-t> :TaskList<CR>
+
 " NERDTree
 map <F2> :NERDTreeToggle<CR>
 let NERDTreeIgnore=['\.svn$','\.bak$']
@@ -99,11 +95,11 @@ let Tlist_Show_One_File = 0
 let Tlist_Sort_Type = "order"
 let Tlist_Use_Horiz_Window = 0
 let Tlist_Use_Right_Window = 0
-let Tlist_WinWidth = 40
+let Tlist_WinWidth = 28
 let tlist_php_settings = 'php;c:class;i:interfaces;d:constant;f:function'
 
 " Disable phpsyntax based indenting for .php files {{{
-au BufRead,BufNewFile *.php		set indentexpr= | set smartindent
+au BufRead,BufNewFile *.php		set smartindent
 " }}}
 
 " {{{ .phps files handled like .php
@@ -125,7 +121,7 @@ inoremap <silent><C-Right> <C-o>:cal search('\<\<Bar>\U\@<=\u\<Bar>\u\ze\%(\U\&\
 " }}}
 
 " Map <F5> to turn spelling on (VIM 7.0+)
-map <F5> :setlocal spell! spelllang=en_us<cr>
+" map <F5> :setlocal spell! spelllang=en_us<cr>
 " Map <F6> to turn spelling (de) on (VIM 7.0+)
 "map <F6> :setlocal spell! spelllang=de<cr>
 
@@ -133,17 +129,5 @@ map <F5> :setlocal spell! spelllang=en_us<cr>
 autocmd InsertLeave * se nocul
 autocmd InsertEnter * se cul 
 
-if has("cscope")
-	set csprg=/usr/bin/cscope
-	set csto=0
-	set cst
-	set nocsverb
-	" add any database in current directory
-	if filereadable("cscope.out")
-	    cs add cscope.out
-	" else add database pointed to by environment
-	elseif $CSCOPE_DB != ""
-	    cs add $CSCOPE_DB
-	endif
-	set csverb
-endif
+" phpcs 
+nnoremap <F6> :call Phpcs()<CR>
